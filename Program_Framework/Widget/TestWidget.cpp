@@ -6,6 +6,7 @@ TestWidget::TestWidget(const std::wstring& _title)
 {
 	t0 = 0;
 
+	// Set Data
 	for (int i = 0; i < 121; ++i) {
 		xdata.emplace_back(radians(3.f * i));
 		ydata1.emplace_back(1.f * cos(xdata[i]));
@@ -40,7 +41,7 @@ TestWidget::TestWidget(const std::wstring& _title)
 	sAxes1->ylabel = L"Y";
 	sAxes1->AddImPlot(sPlot1);
 	sAxes1->AddImPlot(sPlot2);
-	
+
 	sAxes2->axesCoordType = ImPlotCoordType_Polar;
 	sAxes2->xlim = ImVec2(-2, 2);
 	sAxes2->ylim = ImVec2(-2, 2);
@@ -70,6 +71,8 @@ void TestWidget::Update()
 		ydata2[i] = 1.5f * sin(xdata[i]);
 	}
 
+	sAxes1->xlim = { radians(t0),radians(t0 + 360.f) };
+
 	sPlot1->SetData(xdata, ydata1);
 	sPlot2->SetData(xdata, ydata2);
 }
@@ -80,4 +83,6 @@ void TestWidget::GuiUpdate()
 	{
 		sPlotter->Render();
 	}
+
+	
 }
