@@ -6,28 +6,23 @@
 class TestWidget final : public IWidget
 {
 public:
-	TestWidget(const std::wstring& _title)
-		:IWidget(_title)
-	{
-		popup.reset(new TestPopup("testpopup"));
-		browser.reset(new BrowserPopup("browser"));
-		idx = 0;
-		vItem.emplace_back("1");
-		vItem.emplace_back("12");
-		vItem.emplace_back("13");
-		vItem.emplace_back("14");
-	};
+	TestWidget(const std::wstring& _title);
 	virtual ~TestWidget() {};
 
 	// IWidget을(를) 통해 상속됨
 	virtual void Update() override;
+	virtual void GuiUpdate() override;
 
 private:
-	int idx;
-	std::vector<std::string> vItem;
+	float t0;
 
-	std::shared_ptr<TestPopup> popup;
-	std::shared_ptr<BrowserPopup> browser;
+	std::vector<float> xdata;
+	std::vector<float> ydata1;
+	std::vector<float> ydata2;
 
-	virtual void GuiUpdate() override;
+	std::shared_ptr<ImGuiPlotter<float>> sPlotter;
+	std::shared_ptr<ImAxes<float>> sAxes1;
+	std::shared_ptr<ImAxes<float>> sAxes2;
+	std::shared_ptr<ImPlot<float>> sPlot1;
+	std::shared_ptr<ImPlot<float>> sPlot2;
 };

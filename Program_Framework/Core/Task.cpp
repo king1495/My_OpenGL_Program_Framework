@@ -4,7 +4,7 @@
 void Task::Init()
 {
 	pGUI.reset(new GUI);
-	pGUI->AddWidget("Test", new TestWidget(L"Å×½ºÆ®"));
+	pGUI->AddWidget("Test", new TestWidget(L"Test Window"));
 }
 
 void Task::Update()
