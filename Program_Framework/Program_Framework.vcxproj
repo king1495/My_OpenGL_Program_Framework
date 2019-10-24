@@ -30,6 +30,7 @@
     <ClCompile Include="ImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Process\TestProcess.cpp" />
     <ClCompile Include="Utility\BinaryFile.cpp" />
     <ClCompile Include="Utility\tinyfiledialogs.c" />
     <ClCompile Include="Widget\BrowserPopup.cpp" />
@@ -45,6 +46,8 @@
     <ClInclude Include="Core\subSystem\Singleton.h" />
     <ClInclude Include="Core\subSystem\Timer.h" />
     <ClInclude Include="imGuiKR\ImGuiKR.h" />
+    <ClInclude Include="Process\IProcess.h" />
+    <ClInclude Include="Process\TestProcess.h" />
     <ClInclude Include="utility.h" />
     <ClInclude Include="Core\Task.h" />
     <ClInclude Include="defines.h" />

@@ -1,7 +1,7 @@
 #pragma once
 #include "OpenGLCore.h"
 #include "Widget/TestWidget.h"
-
+#include "Process/TestProcess.h"
 
 class Task final : public OpenGLCore
 {
@@ -17,5 +17,5 @@ public:
 
 private:
 	std::unique_ptr<GUI> pGUI;
-
+	TestProcess pTest;
 };

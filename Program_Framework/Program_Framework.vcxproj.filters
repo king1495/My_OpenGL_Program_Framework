@@ -63,6 +63,9 @@
     <ClCompile Include="Utility\tinyfiledialogs.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Process\TestProcess.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -165,6 +168,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Utility\MathUtil.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Process\IProcess.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Process\TestProcess.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

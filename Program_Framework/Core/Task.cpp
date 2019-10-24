@@ -5,6 +5,8 @@ void Task::Init()
 {
 	pGUI = make_unique<GUI>();
 	pGUI->AddWidget("Test", new TestWidget(L"Test Window"));
+	pTest.maxNum = 100;
+	pTest.Run();
 }
 
 void Task::Update()
@@ -24,5 +26,4 @@ void Task::GuiRender()
 
 void Task::Destroy()
 {
-
 }

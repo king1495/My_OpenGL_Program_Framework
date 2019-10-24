@@ -70,7 +70,7 @@ void TestWidget::Update()
 		ydata2[i] = 1.5f * sin(xdata[i]);
 	}
 
-	sAxes1->xlim = { radians(t0),radians(t0 + 360.f) };
+	sAxes1->xlim = { radians(t0), radians(t0 + 360.f) };
 
 	sPlot1->SetData(xdata, ydata1);
 	sPlot2->SetData(xdata, ydata2);
