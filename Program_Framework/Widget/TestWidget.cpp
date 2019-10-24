@@ -7,7 +7,6 @@ TestWidget::TestWidget(const std::wstring& _title)
 	t0 = 0;
 
 	for (int i = 0; i < 121; ++i) {
-		//xData.push_back(3.f * i);
 		xdata.emplace_back(radians(3.f * i));
 		ydata1.emplace_back(1.f * cos(xdata[i]));
 		ydata2.emplace_back(1.5f * sin(xdata[i]));
@@ -27,10 +26,6 @@ TestWidget::TestWidget(const std::wstring& _title)
 
 	sPlot1->SetData(xdata, ydata1);
 	sPlot2->SetData(xdata, ydata2);
-
-	
-	//imPlot2.markerColor = ImColor(0.6f, 0.6f, 1.f, 1.0f);
-	//imPlot2.SetData(xData, yData2);
 
 	sAxes1->axesCoordType = ImPlotCoordType_Cartesian;
 	sAxes1->xlim = ImVec2(0, radians(360.f));
@@ -64,8 +59,6 @@ TestWidget::TestWidget(const std::wstring& _title)
 	sPlotter->SubPlot(2, 1);
 	sPlotter->AddImAxes(sAxes1, 0);
 	sPlotter->AddImAxes(sAxes2, 1);
-	//imPlotter.AddImAxes(&imAxes, 2);
-	//imPlotter.AddImAxes(imAxes);
 }
 
 void TestWidget::Update()
@@ -77,35 +70,14 @@ void TestWidget::Update()
 		ydata2[i] = 1.5f * sin(xdata[i]);
 	}
 
-	/*if (sAxes->axesCoordType == ImPlotCoordType_Cartesian)
-		sAxes->xlim = { radians(t0),radians(t0 + 360.f) };*/
-
 	sPlot1->SetData(xdata, ydata1);
 	sPlot2->SetData(xdata, ydata2);
-
-	//if (_KeyCode->isKeyDown(VK_1)) {
-	//	imPlot1.lineStyle = ImPlotLineStyle_None;
-	//	imPlot1.markerStyle = ImPlotMarkerStyle_Circle;
-	//}
-	//if (_KeyCode->isKeyDown(VK_2)) {
-	//	imPlot1.lineStyle = ImPlotLineStyle_Line;
-	//	imPlot1.markerStyle = ImPlotMarkerStyle_None;
-	//}
 }
 
 void TestWidget::GuiUpdate()
 {
 	using namespace ImGuiKR;
 	{
-		//if (Button(L"Set Cartesian Coordinate")) {
-		//	sAxes->axesCoordType = ImPlotCoordType_Cartesian;
-		//	return;
-		//}
-		//if (Button(L"Set Polar Coordinate")) {
-		//	sAxes->axesCoordType = ImPlotCoordType_Polar;
-		//	return;
-		//}
-
 		sPlotter->Render();
 	}
 }

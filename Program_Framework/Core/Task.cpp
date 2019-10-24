@@ -3,7 +3,7 @@
 
 void Task::Init()
 {
-	pGUI.reset(new GUI);
+	pGUI = make_unique<GUI>();
 	pGUI->AddWidget("Test", new TestWidget(L"Test Window"));
 }
 
