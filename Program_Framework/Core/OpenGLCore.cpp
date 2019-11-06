@@ -39,16 +39,25 @@ void OpenGLCore::InitOpenGL()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
+	int width = GetSystemMetrics(SM_CXSCREEN);
+	int height = GetSystemMetrics(SM_CYSCREEN);
+
+	if (appDesc.bFullScreen) {
+		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+		appDesc.bFixWindow = true;
+		appDesc.Width = width;
+		appDesc.Height = height;
+	}
+
 	if (appDesc.bFixWindow) glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	appDesc.pWindow = glfwCreateWindow(appDesc.Width, appDesc.Height, appDesc.AppName, NULL, NULL);
+
 	if (!appDesc.pWindow) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
-	int width = GetSystemMetrics(SM_CXSCREEN);
-	int height = GetSystemMetrics(SM_CYSCREEN);
 	glfwSetWindowPos(appDesc.pWindow, 0.5 * (width - appDesc.Width), 0.5 * (height - appDesc.Height));
 
 	// Set Callback Function

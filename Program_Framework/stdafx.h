@@ -71,5 +71,6 @@ struct APPDESC
 	float ypos;
 	bool bVsync;
 	bool bFixWindow;
+	bool bFullScreen;
 };
 extern APPDESC appDesc;

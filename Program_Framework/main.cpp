@@ -14,8 +14,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	appDesc.Height = 720;
 	appDesc.xpos = NULL;
 	appDesc.ypos = NULL;
-	appDesc.bFixWindow = true;
+	appDesc.bFixWindow = false;
 	appDesc.bVsync = true;
+	appDesc.bFullScreen = false;
 
 	std::unique_ptr<OpenGLCore> task = std::make_unique<Task>();
 	task->Run();
