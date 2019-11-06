@@ -26,4 +26,5 @@ void Task::GuiRender()
 
 void Task::Destroy()
 {
+	_DB->DestroyInstance();
 }

@@ -81,5 +81,6 @@ void TestWidget::GuiUpdate()
 	using namespace ImGuiKR;
 	{
 		sPlotter->Render();
+		sPlotter->Render();
 	}
 }

@@ -6,10 +6,9 @@
 
 namespace TimeUtil
 {
-	inline long long GetTimeMs() {
+	inline double GetTimeMs() {
 		auto now = std::chrono::system_clock::now();
-		auto now_conv = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
-		return now_conv.time_since_epoch().count();
+		return ((double)now.time_since_epoch().count() * 1e-6);
 	}
 
 	inline tm GetTimeStruct() {
@@ -28,7 +27,7 @@ namespace TimeUtil
 		{
 			strftime(out_string, sizeof(out_string) - 1, format.c_str(), &t2);
 		}
-		catch (const std::exception & err)
+		catch (const std::exception& err)
 		{
 			std::cout << err.what() << std::endl;
 		}
@@ -43,7 +42,7 @@ namespace TimeUtil
 		{
 			wcsftime(out_string, 0.5 * sizeof(out_string) - 1, format.c_str(), &t2);
 		}
-		catch (const std::exception & err)
+		catch (const std::exception& err)
 		{
 			std::wcout << err.what() << std::endl;
 		}
@@ -56,7 +55,7 @@ namespace TimeUtil
 		{
 			strftime(out_string, sizeof(out_string) - 1, format.c_str(), &_tm);
 		}
-		catch (const std::exception & err)
+		catch (const std::exception& err)
 		{
 			std::cout << err.what() << std::endl;
 		}
@@ -69,7 +68,7 @@ namespace TimeUtil
 		{
 			wcsftime(out_string, 0.5 * sizeof(out_string) - 1, format.c_str(), &_tm);
 		}
-		catch (const std::exception & err)
+		catch (const std::exception& err)
 		{
 			std::wcout << err.what() << std::endl;
 		}

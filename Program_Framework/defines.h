@@ -52,3 +52,5 @@ template <typename T, size_t N> char(*RtlpNumberOf(T(&)[N]))[N];
 #define VK_X 0x58
 #define VK_Y 0x59
 #define VK_Z 0x5A
+
+#define _DB Database::GetInstance()

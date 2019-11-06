@@ -1,15 +1,9 @@
 #pragma once
-#include "ISubSystem.h"
+#include "Singleton.h"
 
-class Database final : public ISubSystem
+class Database final : public Singleton<Database>
 {
 public:
-	static Database& GetInstance() {
-		static Database* _instance = new Database();
-		return *_instance;
-	}
-
-private:
 	Database()
 		: calPackPath(L"")
 		, whitePath(L""), darkPath(L"")
@@ -27,8 +21,6 @@ private:
 	{
 		SaveDB();
 	}
-
-public:
 
 	void SaveDB()
 	{
@@ -94,5 +86,3 @@ public:
 
 	int arduino_port;
 };
-
-#define _DB Database::GetInstance()

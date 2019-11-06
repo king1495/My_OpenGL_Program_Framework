@@ -74,7 +74,7 @@ void GUI::GuiRender()
 	ImGui::PopStyleVar(3);
 
 	ImGuiID dockspace_id = ImGui::GetID("Background");
-	ImGui::DockSpace(dockspace_id, ImVec2(appDesc.Width, appDesc.Height), dockFlags);
+	ImGui::DockSpace(dockspace_id, ImVec2(0, 0), dockFlags);
 
 	showMenuBar();
 
