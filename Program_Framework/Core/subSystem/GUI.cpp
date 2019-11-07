@@ -21,6 +21,9 @@ GUI::GUI()
 
 GUI::~GUI()
 {
+	for (auto popup : popups)
+		SAFE_DELETE(popup.second);
+
 	for (auto widget : widgets)
 		SAFE_DELETE(widget.second);
 }
@@ -50,11 +53,34 @@ void GUI::DeactiveWidget(const string& name)
 	widgets[name]->SetisActive(false);
 }
 
+void GUI::AddPopup(const string& name, IPopup* popup)
+{
+	assert(popups.count(name) < 1);
+	popups[name] = popup;
+}
+
+void GUI::DeletePopup(const string& name)
+{
+	if (popups.count(name) < 1) return;
+	SAFE_DELETE(popups[name]);
+	popups.erase(name);
+}
+
+void GUI::ActivePopup(const string& name)
+{
+	if (popups.count(name) < 1) return;
+	popups[name]->SetisActive(true);
+}
+
 void GUI::Update()
 {
 	if (!isActive) return;
+
 	for (auto widget : widgets)
 		widget.second->Update();
+
+	for (auto popup : popups)
+		popup.second->Update();
 
 #ifdef _DEBUG
 	if (_Input.isKeyDown(VK_F1)) isShowSysteminfo = !isShowSysteminfo;
@@ -80,6 +106,9 @@ void GUI::GuiRender()
 
 	for (auto widget : widgets)
 		widget.second->Render();
+
+	for (auto popup : popups)
+		popup.second->Render();
 
 	ImGui::End();
 
@@ -109,6 +138,20 @@ void GUI::showMenuBar()
 				for (auto widget : widgets) {
 					if (ImGui::MenuItem(widget.second->GetName().c_str())) {
 						widget.second->SetisActive(true);
+					}
+				}
+
+				ImGui::EndMenu();
+			}
+			ImGui::Separator();
+		}
+
+		if (!popups.empty()) {
+			if (ImGui::BeginMenu("Options"))
+			{
+				for (auto popup : popups) {
+					if (ImGui::MenuItem(popup.second->GetName().c_str())) {
+						popup.second->SetisActive(true);
 					}
 				}
 

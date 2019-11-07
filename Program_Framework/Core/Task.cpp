@@ -5,6 +5,7 @@ void Task::Init()
 {
 	pGUI = make_unique<GUI>();
 	pGUI->AddWidget("Test", new TestWidget(L"Test Window"));
+	pGUI->AddPopup("Test Popup", new TestPopup("Test Popup"));
 	pTest.maxNum = 100;
 	pTest.Run();
 }
