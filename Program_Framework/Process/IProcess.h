@@ -14,6 +14,7 @@ public:
 	bool Run()
 	{
 		if (isRun) return false;
+		if (t_job.joinable()) t_job.join();
 		t_job = std::thread([&]() {ThreadProcess(); });
 		return true;
 	}
@@ -48,10 +49,11 @@ protected:
 			MainProcess();
 			lock.unlock();
 			currentLoop++;
-			if ((maxLoop != 0) & (currentLoop >= maxLoop)) isRun = false;
+			if ((maxLoop != 0) & (currentLoop >= maxLoop)) break;
 		}
 		PostProcess();
 		isRun = false;
+		maxLoop = 0;
 	}
 
 	virtual void PreProcess() = 0;

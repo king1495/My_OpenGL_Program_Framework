@@ -8,7 +8,8 @@ namespace TimeUtil
 {
 	inline double GetTimeMs() {
 		auto now = std::chrono::system_clock::now();
-		return ((double)now.time_since_epoch().count() * 1e-6);
+		auto now_ns = std::chrono::time_point_cast<std::chrono::nanoseconds>(now);
+		return ((double)now_ns.time_since_epoch().count()) * 1e-6;
 	}
 
 	inline tm GetTimeStruct() {
