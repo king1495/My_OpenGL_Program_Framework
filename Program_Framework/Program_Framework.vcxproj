@@ -75,9 +75,6 @@
     <ClInclude Include="Widget\TestPopup.h" />
     <ClInclude Include="Widget\TestWidget.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{11B1D3E8-5F4F-4B22-80FF-17BD09A3DF2F}</ProjectGuid>
