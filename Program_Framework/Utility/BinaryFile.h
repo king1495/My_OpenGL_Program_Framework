@@ -60,7 +60,7 @@ public:
 	const mat4 Matrix4();
 	const string String();
 	const wstring WString();
-	void Byte(IN void** data, IN const UINT& dataSize);
+	void Byte(void** data,const UINT& dataSize);
 
 	bool isOpen() { return fileHandle != nullptr; }
 

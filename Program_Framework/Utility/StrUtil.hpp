@@ -93,15 +93,15 @@ namespace StrUtil
 		*str = temp;
 	}
 
-	inline std::string ToString(std::wstring value) {
+	inline std::string ToString(std::wstring value, UINT CodePage = CP_UTF8) {
 		char buf[256];
-		WideCharToMultiByte(CP_UTF8, 0, value.c_str(), -1, buf, ARRAYSIZE(buf), NULL, NULL);
+		WideCharToMultiByte(CodePage, 0, value.c_str(), -1, buf, ARRAYSIZE(buf), NULL, NULL);
 		return std::string(buf);
 	}
 
-	inline std::wstring ToWString(std::string value) {
+	inline std::wstring ToWString(std::string value, UINT CodePage = CP_UTF8) {
 		wchar_t buf[256];
-		MultiByteToWideChar(CP_UTF8, 0, value.c_str(), -1, buf, ARRAYSIZE(buf));
+		MultiByteToWideChar(CodePage, 0, value.c_str(), -1, buf, ARRAYSIZE(buf));
 		return std::wstring(buf);
 	}
 

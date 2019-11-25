@@ -239,7 +239,7 @@ const wstring BinaryReader::WString()
 	return temp;
 }
 
-void BinaryReader::Byte(IN void ** data, IN const UINT & dataSize)
+void BinaryReader::Byte(void ** data, const UINT & dataSize)
 {
 	ReadFile(fileHandle, *data, dataSize, &size, NULL);
 }
