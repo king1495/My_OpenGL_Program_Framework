@@ -147,7 +147,7 @@ void GUI::showMenuBar()
 		}
 
 		if (!popups.empty()) {
-			if (ImGui::BeginMenu("Options"))
+			if (ImGui::BeginMenu("Option"))
 			{
 				for (auto popup : popups) {
 					if (ImGui::MenuItem(popup.second->GetName().c_str())) {

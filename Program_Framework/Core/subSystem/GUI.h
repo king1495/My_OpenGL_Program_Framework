@@ -37,7 +37,6 @@ private:
 
 	std::map<string, class IWidget*> widgets;
 	std::map<string, class IPopup*> popups;
-	std::vector<string> widgetLists;
 
 	double alpha;
 };
