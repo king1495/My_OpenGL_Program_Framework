@@ -76,20 +76,6 @@ namespace ImGuiKR
 		ImGui::BulletText(title);
 	}
 
-	inline bool titleInputText(const std::wstring& _title, std::wstring& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
-		ImGui::AlignTextToFramePadding();
-		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
-		ImGui::PushItemWidth(itemWidth);
-		char buf[256];
-		WideCharToMultiByte(CP_UTF8, 0, _val.c_str(), -1, buf, IM_ARRAYSIZE(buf), NULL, NULL);
-		bool isUpdate = ImGui::InputText(("##text" + id).c_str(), buf, sizeof(buf));
-		wchar_t buf2[256];
-		MultiByteToWideChar(CP_UTF8, 0, buf, -1, buf2, sizeof(buf2));
-		_val = std::wstring(buf2);
-		return isUpdate;
-	}
-
 	inline bool titleCheckBox(const std::wstring& _title, bool& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
