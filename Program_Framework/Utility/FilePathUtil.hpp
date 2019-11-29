@@ -85,7 +85,7 @@ namespace FilePathUtil
 	{
 		namespace fs = std::filesystem;
 		fs::path _path = full_path;
-		if (!fs::is_directory(_path))
+		if (_path.has_extension())
 			_path = _path.remove_filename();
 		if (fs::exists(_path)) return;
 		if (fs::create_directories(_path))
@@ -96,7 +96,7 @@ namespace FilePathUtil
 	{
 		namespace fs = std::filesystem;
 		fs::path _path = full_path;
-		if (!fs::is_directory(_path))
+		if (_path.has_extension())
 			_path = _path.remove_filename();
 		if (fs::exists(_path)) return;
 		if (fs::create_directories(_path))
