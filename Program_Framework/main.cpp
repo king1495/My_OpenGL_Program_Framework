@@ -4,8 +4,8 @@
 APPDESC appDesc;
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
 {
+	setlocale(LC_ALL, "");
 	ZeroMemory(&appDesc, sizeof(APPDESC));
-
 	std::srand((unsigned int)time(NULL));
 
 	appDesc.AppName = (char*)"Base_framework";
