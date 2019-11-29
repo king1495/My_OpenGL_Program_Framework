@@ -85,20 +85,22 @@ namespace FilePathUtil
 	{
 		namespace fs = std::filesystem;
 		fs::path _path = full_path;
-		if (fs::is_directory(_path))
-			fs::create_directories(_path);
-		else
-			fs::create_directories(_path.remove_filename());
+		if (!fs::is_directory(_path))
+			_path = _path.remove_filename();
+		if (fs::exists(_path)) return;
+		if (fs::create_directories(_path))
+			std::cout << "Create Directory : " << _path << endl;
 	}
 
 	inline void MakeDirectory(const std::string& full_path)
 	{
 		namespace fs = std::filesystem;
 		fs::path _path = full_path;
-		if (fs::is_directory(_path))
-			fs::create_directories(_path);
-		else
-			fs::create_directories(_path.remove_filename());
+		if (!fs::is_directory(_path))
+			_path = _path.remove_filename();
+		if (fs::exists(_path)) return;
+		if (fs::create_directories(_path))
+			std::cout << "Create Directory : " << _path << endl;
 	}
 
 	inline void GetFileList(std::vector<std::wstring>& result, const std::wstring& path, const std::wstring& filter = L"", const bool& findAll = false) {
