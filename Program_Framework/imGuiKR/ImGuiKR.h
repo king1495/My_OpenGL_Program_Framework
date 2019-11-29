@@ -77,51 +77,66 @@ namespace ImGuiKR
 	}
 
 	inline bool titleCheckBox(const std::wstring& _title, bool& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		return ImGui::Checkbox(("##check" + id).c_str(), &_val);
 	}
 
 	inline bool titleCombo(const std::wstring& _title, int& _val, const std::string& id, vector<string> _items, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		return ImGui::Combo(("##list" + id).c_str(), &_val, &stringgetter, static_cast<void*>(&_items), _items.size());
 	}
 
 	inline bool titleInputDouble(const std::wstring& _title, double& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		return ImGui::InputDouble(("##double" + id).c_str(), &_val, 0, 0, "%.3f");
 	}
 
 	inline bool titleInputFloat(const std::wstring& _title, float& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		return ImGui::InputFloat(("##float" + id).c_str(), &_val, 0, 0, "%.3f");
 	}
 
 	inline bool titleInputInt(const std::wstring& _title, int& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		return ImGui::InputInt(("##int" + id).c_str(), &_val);
 	}
 
+	inline bool titleInputInt2(const std::wstring& _title, int& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
+		ImGui::AlignTextToFramePadding();
+		TextUnformatted(_title);
+		ImGui::SameLine(curX + textWidth);
+		ImGui::PushItemWidth(itemWidth);
+		return ImGui::InputInt2(("##int2" + id).c_str(), &_val);
+	}
+
 	inline bool titleInputText(const std::wstring& _title, wstring& _buf, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		char buf[256];
 		WideCharToMultiByte(CP_UTF8, 0, _buf.c_str(), -1, buf, IM_ARRAYSIZE(buf), NULL, NULL);
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		if (ImGui::InputText(("##text" + id).c_str(), buf, IM_ARRAYSIZE(buf))) {
 			wchar_t newbuf[256];
@@ -132,10 +147,25 @@ namespace ImGuiKR
 		return false;
 	}
 
-	inline bool titleInputVector2(const std::wstring& _title, vec2& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+	inline bool titleInputVector2i(const std::wstring& _title, vec2& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
+		ImGui::PushItemWidth(itemWidth);
+		int x = _val.x, y = _val.y;
+		bool flag1 = ImGui::InputInt(("##vec2x" + id).c_str(), &(x));
+		ImGui::SameLine();
+		bool flag2 = ImGui::InputInt(("##vec2y" + id).c_str(), &(y));
+		_val = vec2(x, y);
+		return flag1 | flag2;
+	}
+
+	inline bool titleInputVector2(const std::wstring& _title, vec2& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
+		ImGui::AlignTextToFramePadding();
+		TextUnformatted(_title);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		bool flag1 = ImGui::InputFloat(("##vec2x" + id).c_str(), &(_val.x), 0, 0, "%.3f");
 		ImGui::SameLine();
@@ -144,9 +174,10 @@ namespace ImGuiKR
 	}
 
 	inline bool titleInputVector3(const std::wstring& _title, vec3& _val, const std::string& id, const float& textWidth = 100, const float& itemWidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		ImGui::AlignTextToFramePadding();
 		TextUnformatted(_title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(itemWidth);
 		bool flag1 = ImGui::InputFloat(("##vec3x" + id).c_str(), &(_val.x), 0, 0, "%.3f");
 		ImGui::SameLine();
@@ -157,6 +188,7 @@ namespace ImGuiKR
 	}
 
 	inline bool FileSelect(wstring _title, wstring& _buf, string id, float textWidth = 100, float boxwidth = 200, const WCHAR* filter = L"*.*\0*.*") {
+		float curX = ImGui::GetCursorPosX();
 		bool result = false;
 		char buf[256];
 		char title[256];
@@ -164,7 +196,7 @@ namespace ImGuiKR
 		WideCharToMultiByte(CP_UTF8, 0, _title.c_str(), -1, title, IM_ARRAYSIZE(title), NULL, NULL);
 		ImGui::AlignTextToFramePadding();
 		ImGui::Text(title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(boxwidth);
 		result += ImGui::InputText(("##fileinput" + id).c_str(), buf, IM_ARRAYSIZE(buf));
 		ImGui::SameLine();
@@ -185,6 +217,7 @@ namespace ImGuiKR
 	}
 
 	inline bool DirectorySelect(wstring _title, wstring& _buf, string id, float textWidth = 100, float boxwidth = 200) {
+		float curX = ImGui::GetCursorPosX();
 		bool result = false;
 		char buf[256];
 		char title[256];
@@ -192,7 +225,7 @@ namespace ImGuiKR
 		WideCharToMultiByte(CP_UTF8, 0, _title.c_str(), -1, title, IM_ARRAYSIZE(title), NULL, NULL);
 		ImGui::AlignTextToFramePadding();
 		ImGui::Text(title);
-		ImGui::SameLine(textWidth);
+		ImGui::SameLine(curX + textWidth);
 		ImGui::PushItemWidth(boxwidth);
 		result += ImGui::InputText(("##pathinput" + id).c_str(), buf, IM_ARRAYSIZE(buf));
 		ImGui::SameLine();
