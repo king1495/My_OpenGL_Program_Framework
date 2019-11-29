@@ -51,7 +51,9 @@ private: // Callbacks
 	}
 
 	static void KeyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+#ifdef _DEBUG
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
+#endif		
 	}
 };
