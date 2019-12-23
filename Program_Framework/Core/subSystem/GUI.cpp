@@ -16,6 +16,8 @@ GUI::GUI()
 	, isShowDemo(false)
 	, isActive(true)
 	, alpha(1.f)
+	, iHeight(appDesc.Height)
+	, iWidth(appDesc.Width)
 {
 }
 
@@ -125,6 +127,39 @@ void GUI::showMenuBar()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
+			if (ImGui::MenuItem("V-Sync", NULL, appDesc.bVsync)) {
+				appDesc.bVsync = !appDesc.bVsync;
+				glfwSwapInterval(appDesc.bVsync);
+			}
+
+			if (ImGui::MenuItem("Full Screen", NULL, appDesc.bFullScreen)) {
+				appDesc.bFullScreen = !appDesc.bFullScreen;
+				int width = GetSystemMetrics(SM_CXSCREEN);
+				int height = GetSystemMetrics(SM_CYSCREEN);
+
+				if (appDesc.bFullScreen) {
+					glfwSetWindowAttrib(appDesc.pWindow, GLFW_RESIZABLE, GLFW_FALSE);
+					glfwSetWindowAttrib(appDesc.pWindow, GLFW_DECORATED, GLFW_FALSE);
+					glfwSetWindowAttrib(appDesc.pWindow, GLFW_FLOATING, GLFW_TRUE);
+					iWidth = appDesc.Width;
+					iHeight = appDesc.Height;
+					appDesc.Width = width;
+					appDesc.Height = height;
+				}
+				else {
+					glfwSetWindowAttrib(appDesc.pWindow, GLFW_FLOATING, GLFW_FALSE);
+					glfwSetWindowAttrib(appDesc.pWindow, GLFW_DECORATED, GLFW_TRUE);
+					if (!appDesc.bFixWindow) glfwSetWindowAttrib(appDesc.pWindow, GLFW_RESIZABLE, GLFW_TRUE);
+					appDesc.Width = iWidth;
+					appDesc.Height = iHeight;
+				}
+
+				glfwSetWindowPos(appDesc.pWindow, 0.5 * (width - appDesc.Width), 0.5 * (height - appDesc.Height));
+				glfwSetWindowSize(appDesc.pWindow, appDesc.Width, appDesc.Height);
+			}
+
+			ImGui::Separator();
+
 			if (ImGui::MenuItem("Quit", "Alt + F4"))
 				glfwSetWindowShouldClose(appDesc.pWindow, GLFW_TRUE);
 
@@ -165,10 +200,7 @@ void GUI::showMenuBar()
 			if (ImGui::MenuItem("System Info", "F1")) isShowSysteminfo = !isShowSysteminfo;
 			if (ImGui::MenuItem("Style Editor", "F2")) isShowStyleeditor = !isShowStyleeditor;
 			if (ImGui::MenuItem("Show Demo")) isShowDemo = !isShowDemo;
-			if (ImGui::MenuItem("V-Sync", "V-Sync On/Off")) {
-				appDesc.bVsync = !appDesc.bVsync;
-				glfwSwapInterval(appDesc.bVsync);
-			}
+
 			ImGui::EndMenu();
 		}
 #endif // DEBUG

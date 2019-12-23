@@ -2,7 +2,7 @@
 #include "Widget/IWidget.h"
 #include "Widget/IPopup.h"
 
-class GUI final
+class GUI final : public ISubSystem
 {
 public:
 	GUI();
@@ -35,8 +35,9 @@ private:
 	void showSysteminfo();
 	void showStyleEditor();
 
-	std::map<string, class IWidget*> widgets;
-	std::map<string, class IPopup*> popups;
+	std::map<std::string, class IWidget*> widgets;
+	std::map<std::string, class IPopup*> popups;
 
 	double alpha;
+	int iWidth, iHeight;
 };
