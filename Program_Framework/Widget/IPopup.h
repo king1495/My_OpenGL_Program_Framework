@@ -18,6 +18,7 @@ public:
 			ImGui::OpenPopup(popupID.c_str());
 			bOpen = false;
 		}
+
 		if (ImGui::BeginPopupModal(popupID.c_str(), NULL, popupFlags)) {
 			GuiUpdate();
 			if (ImGui::Button("Close"))
