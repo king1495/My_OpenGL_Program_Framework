@@ -138,6 +138,7 @@ namespace StrUtil
 		std::stringstream ss;
 		ss << std::fixed << std::setprecision(_precision) << _val;
 		std::string result = ss.str();
+		return result;
 	}
 
 	template<typename T>
@@ -145,5 +146,6 @@ namespace StrUtil
 		std::wstringstream ss;
 		ss << std::fixed << std::setprecision(_precision) << _val;
 		std::wstring result = ss.str();
+		return result;
 	}
 }
