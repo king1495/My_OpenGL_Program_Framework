@@ -105,6 +105,10 @@ namespace FilePathUtil
 
 	inline void GetFileList(std::vector<std::wstring>& result, const std::wstring& path, const std::wstring& filter = L"", const bool& findAll = false) {
 		namespace fs = std::filesystem;
+
+		if (!fs::exists(path)) return;
+		if (!fs::is_directory(path)) return;
+
 		for (auto& p : fs::directory_iterator(path, fs::directory_options::skip_permission_denied))
 		{
 			if (p.is_directory() & findAll) {
