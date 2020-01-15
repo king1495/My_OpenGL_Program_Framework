@@ -63,7 +63,7 @@ TestWidget::TestWidget(const std::wstring& _title)
 
 void TestWidget::Update()
 {
-	t0++;
+	t0 += 60.f * _Timer.GetElapsedTime();
 	for (int i = 0; i < xdata.size(); ++i) {
 		xdata[i] = radians(3.f * i + t0);
 		ydata1[i] = 1.f * cos(xdata[i]);
