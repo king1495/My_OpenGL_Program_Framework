@@ -216,6 +216,36 @@ namespace ImGuiKR
 		return result;
 	}
 
+	inline bool MultiFileSelect(wstring _title, vector<wstring>& _filelist, string id, float textWidth = 100, float boxwidth = 200, const WCHAR* filter = L"*.*\0*.*") {
+		float curX = ImGui::GetCursorPosX();
+		bool result = false;
+		char title[256];
+		char buf[256];
+		ZeroMemory(buf, sizeof(buf));
+		wstring _buf = L"";
+		if (!_filelist.empty())
+			_buf = _filelist[0].c_str();
+		WideCharToMultiByte(CP_UTF8, 0, _buf.c_str(), -1, buf, IM_ARRAYSIZE(title), NULL, NULL);
+		WideCharToMultiByte(CP_UTF8, 0, _title.c_str(), -1, title, IM_ARRAYSIZE(title), NULL, NULL);
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text(title);
+		ImGui::SameLine(curX + textWidth);
+		if (ImGui::Button(("...##button" + id).c_str())) {
+			wstring temp = tinyfd_openFileDialogW(L"파일을 선택하세요.", _buf.c_str(), 0, filter, NULL, true);
+			if (!temp.empty()) {
+				StrUtil::Replace(&temp, L"\\", L"/");
+				StrUtil::SplitString(_filelist, temp, L"|");
+				result += true;
+			}
+		}
+		else {
+			wchar_t newbuf[256];
+			MultiByteToWideChar(CP_UTF8, 0, buf, -1, newbuf, IM_ARRAYSIZE(newbuf));
+			_buf = wstring(newbuf);
+		}
+		return result;
+	}
+
 	inline bool DirectorySelect(wstring _title, wstring& _buf, string id, float textWidth = 100, float boxwidth = 200) {
 		float curX = ImGui::GetCursorPosX();
 		bool result = false;

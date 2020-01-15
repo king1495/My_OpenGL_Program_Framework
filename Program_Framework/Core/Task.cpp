@@ -5,7 +5,9 @@ void Task::Init()
 {
 	pGUI = make_unique<GUI>();
 	pGUI->AddWidget("Test", new TestWidget(L"Test Window"));
+	pGUI->AddWidget("FileSelect", new FileSelectWidget(L"FileSelect Window"));
 	pGUI->AddPopup("Test Popup", new TestPopup("Test Popup"));
+	pGUI->AddPopup("Browser Popup", new BrowserPopup("Browser Popup"));
 	//pTest.maxNum = 100;
 	//pTest.Run();
 }

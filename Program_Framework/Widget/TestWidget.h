@@ -1,7 +1,5 @@
 #pragma once
 #include "IWidget.h"
-#include "Widget/TestPopup.h"
-#include "Widget/BrowserPopup.h"
 
 class TestWidget final : public IWidget
 {

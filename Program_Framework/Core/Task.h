@@ -1,6 +1,9 @@
 #pragma once
 #include "OpenGLCore.h"
 #include "Widget/TestWidget.h"
+#include "Widget/FileSelectWidget.h"
+#include "Widget/TestPopup.h"
+#include "Widget/BrowserPopup.h"
 #include "Process/TestProcess.h"
 
 class Task final : public OpenGLCore
