@@ -49,8 +49,7 @@ private:
 	bool stop_all;
 };
 
-// the constructor just launches some amount of workers
-inline ThreadPool::ThreadPool(size_t _size)
+ThreadPool::ThreadPool(size_t _size)
 	: stop_all(false)
 {
 	workers.reserve(_size);
@@ -58,7 +57,6 @@ inline ThreadPool::ThreadPool(size_t _size)
 		workers.emplace_back([this]() {this->WorkerThread(); });
 }
 
-// add new work item to the pool
 template<class F, class... Args>
 std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueTask(F&& f, Args&&... args)
 {
@@ -81,8 +79,7 @@ std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueTask(F
 	return result;
 }
 
-// the destructor joins all threads
-inline ThreadPool::~ThreadPool()
+ThreadPool::~ThreadPool()
 {
 	{
 		std::unique_lock<std::mutex> lock(mutex_task);
