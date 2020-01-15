@@ -58,6 +58,7 @@ using namespace glm;
 #include "Core/subSystem/Database.h"
 #include "Core/subSystem/Timer.h"
 #include "Core/subSystem/Input.h"
+#include "Core/subSystem/ThreadPool.h"
 #include "Core/subSystem/GUI.h"
 
 // AppSettings

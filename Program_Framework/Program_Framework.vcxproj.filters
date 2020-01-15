@@ -176,5 +176,8 @@
     <ClInclude Include="Process\TestProcess.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Core\subSystem\ThreadPool.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
