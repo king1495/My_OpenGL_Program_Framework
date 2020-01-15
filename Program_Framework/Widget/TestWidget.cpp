@@ -22,7 +22,7 @@ TestWidget::TestWidget(const std::wstring& _title)
 	}
 
 	for (int i = 0; i < 10; ++i) {
-		std::future<int> temp = _ThreadPool.enqueue(ThreadFunc, i);
+		std::future<int> temp = _ThreadPool.EnqueueTask(ThreadFunc, i);
 		if (std::future_status::ready == temp.wait_for(std::chrono::milliseconds(1)))
 			cout << "Result : " << temp.get() << endl;
 		//std::future<int> temp = std::async(ThreadFunc, i);
