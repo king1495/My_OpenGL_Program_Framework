@@ -22,8 +22,24 @@ public:
 	std::future<typename std::result_of<F(Args...)>::type> EnqueueTask(F&& f, Args&&... args);
 
 private:
-	ThreadPool(size_t _size = std::thread::hardware_concurrency() - 1);
-	~ThreadPool();
+	ThreadPool(size_t _size = std::thread::hardware_concurrency() - 1)
+		: stop_all(false)
+	{
+		workers.reserve(_size);
+		for (size_t i = 0; i < _size; ++i)
+			workers.emplace_back([this]() {this->WorkerThread(); });
+	}
+	~ThreadPool()
+	{
+		{
+			std::unique_lock<std::mutex> lock(mutex_task);
+			stop_all = true;
+		}
+
+		cv_task.notify_all();
+		for (std::thread& worker : workers)
+			worker.join();
+	}
 
 	void WorkerThread()
 	{
@@ -49,14 +65,6 @@ private:
 	bool stop_all;
 };
 
-ThreadPool::ThreadPool(size_t _size)
-	: stop_all(false)
-{
-	workers.reserve(_size);
-	for (size_t i = 0; i < _size; ++i)
-		workers.emplace_back([this]() {this->WorkerThread(); });
-}
-
 template<class F, class... Args>
 std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueTask(F&& f, Args&&... args)
 {
@@ -77,18 +85,6 @@ std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueTask(F
 	cv_task.notify_one();
 
 	return result;
-}
-
-ThreadPool::~ThreadPool()
-{
-	{
-		std::unique_lock<std::mutex> lock(mutex_task);
-		stop_all = true;
-	}
-
-	cv_task.notify_all();
-	for (std::thread& worker : workers)
-		worker.join();
 }
 
 #define _ThreadPool ThreadPool::GetInstance()

@@ -17,17 +17,12 @@ void FileSelectWidget::GuiUpdate()
 		if (MultiFileSelect(L"파일 경로", filelist, "file_path", 150, 200,L"*.*\0*.*")) {
 			//wcout << file_path << endl;
 		}
-		ImGui::BeginChild("radioSelect", ImVec2(400, 50), true);
-
-		ImGui::EndChild();
-
 		ImGui::BeginChild("filelistTable", ImVec2(400, 400), true);
 		for (int i = 0; i < filelist.size(); i++)
 		{
 			Selectable(filelist[i]);
 		}
 		ImGui::EndChild();
-
 		Button(L"실행");
 	}
 }

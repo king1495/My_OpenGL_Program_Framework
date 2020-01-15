@@ -21,13 +21,13 @@ TestWidget::TestWidget(const std::wstring& _title)
 		ydata2.emplace_back(1.5f * sin(xdata[i]));
 	}
 
-	//for (int i = 0; i < 10; ++i) {
-	//	std::future<int> temp = _ThreadPool.EnqueueTask(ThreadFunc, i);
-	//	if (std::future_status::ready == temp.wait_for(std::chrono::milliseconds(1)))
-	//		cout << "Result : " << temp.get() << endl;
-	//	//std::future<int> temp = std::async(ThreadFunc, i);
+	for (int i = 0; i < 10; ++i) {
+		std::future<int> temp = _ThreadPool.EnqueueTask(ThreadFunc, i);
+		if (std::future_status::ready == temp.wait_for(std::chrono::milliseconds(1)))
+			cout << "Result : " << temp.get() << endl;
+		//std::future<int> temp = std::async(ThreadFunc, i);
 
-	//}
+	}
 
 	sPlotter = make_shared<ImGuiPlotter<float>>();
 	sAxes1 = make_shared<ImAxes<float>>();
