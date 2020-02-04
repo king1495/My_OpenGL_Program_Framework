@@ -108,14 +108,14 @@ namespace StrUtil
 	// trim from start (in place)
 	inline void ltrim(std::string& s) {
 		s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
-			return !std::isspace(ch);
+			return !isspace(ch);
 			}));
 	}
 
 	// trim from end (in place)
 	inline void rtrim(std::string& s) {
 		s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
-			return !std::isspace(ch);
+			return !isspace(ch);
 			}).base(), s.end());
 	}
 

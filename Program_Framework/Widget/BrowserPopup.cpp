@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BrowserPopup.h"
 
-namespace fs = std::filesystem;
+namespace fs = std::experimental::filesystem;
 
 void BrowserPopup::Update()
 {
@@ -54,11 +54,11 @@ void BrowserPopup::GuiUpdate()
 					}
 
 				int file_count = 0;
-				for (auto& p : fs::directory_iterator(current_path, fs::directory_options::skip_permission_denied))
+				for (auto& p : fs::directory_iterator(current_path))
 				{
 					if (Selectable(p.path().filename().wstring(), selected_file == file_count, ImGuiSelectableFlags_AllowDoubleClick)) {
 						selected_file = file_count;
-						if (ImGui::IsMouseDoubleClicked(0) & p.is_directory()) {
+						if (ImGui::IsMouseDoubleClicked(0) & fs::is_directory(p)) {
 							undo.push(current_path);
 							while (!redo.empty()) redo.pop();
 							current_path = p.path();
@@ -142,7 +142,7 @@ void BrowserPopup::GetDriveList(std::vector<std::wstring>& _vDrives)
 	}
 }
 
-void BrowserPopup::GetDirectoryTree(const std::filesystem::path& _path, const std::wstring& _rootName)
+void BrowserPopup::GetDirectoryTree(const std::experimental::filesystem::path& _path, const std::wstring& _rootName)
 {
 	using namespace ImGuiKR;
 	{
@@ -156,9 +156,9 @@ void BrowserPopup::GetDirectoryTree(const std::filesystem::path& _path, const st
 			selected_file = -1;
 		}
 		if (node_open) {
-			for (auto& p : fs::directory_iterator(_path, fs::directory_options::skip_permission_denied))
+			for (auto& p : fs::directory_iterator(_path))
 			{
-				if (p.is_directory())
+				if (fs::is_directory(p))
 					GetDirectoryTree(p.path());
 			}
 			TreePop();

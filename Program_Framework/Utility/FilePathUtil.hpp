@@ -83,7 +83,7 @@ namespace FilePathUtil
 
 	inline void MakeDirectory(const std::wstring& full_path)
 	{
-		namespace fs = std::filesystem;
+		namespace fs = std::experimental::filesystem;
 		fs::path _path = full_path;
 		if (_path.has_extension())
 			_path = _path.remove_filename();
@@ -94,7 +94,7 @@ namespace FilePathUtil
 
 	inline void MakeDirectory(const std::string& full_path)
 	{
-		namespace fs = std::filesystem;
+		namespace fs = std::experimental::filesystem;
 		fs::path _path = full_path;
 		if (_path.has_extension())
 			_path = _path.remove_filename();
@@ -104,14 +104,15 @@ namespace FilePathUtil
 	}
 
 	inline void GetFileList(std::vector<std::wstring>& result, const std::wstring& path, const std::wstring& filter = L"", const bool& findAll = false) {
-		namespace fs = std::filesystem;
+		namespace fs = std::experimental::filesystem;
 
 		if (!fs::exists(path)) return;
 		if (!fs::is_directory(path)) return;
 
-		for (auto& p : fs::directory_iterator(path, fs::directory_options::skip_permission_denied))
+		for (auto& p : fs::directory_iterator(path))
 		{
-			if (p.is_directory() & findAll) {
+			
+			if (fs::is_directory(p) & findAll) {
 				GetFileList(result, p.path().wstring(), filter, findAll);
 			}
 			else
