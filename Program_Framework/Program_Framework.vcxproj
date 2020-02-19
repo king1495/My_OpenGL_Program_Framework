@@ -33,9 +33,7 @@
     <ClCompile Include="Process\TestProcess.cpp" />
     <ClCompile Include="Utility\BinaryFile.cpp" />
     <ClCompile Include="Utility\tinyfiledialogs.c" />
-    <ClCompile Include="Widget\BrowserPopup.cpp" />
-    <ClCompile Include="Widget\TestPopup.cpp" />
-    <ClCompile Include="Widget\TestWidget.cpp" />
+    <ClCompile Include="Widget\CurveFitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\OpenGLCore.h" />
@@ -70,11 +68,9 @@
     <ClInclude Include="Utility\StrUtil.hpp" />
     <ClInclude Include="Utility\TimeUtil.hpp" />
     <ClInclude Include="Utility\tinyfiledialogs.h" />
-    <ClInclude Include="Widget\BrowserPopup.h" />
+    <ClInclude Include="Widget\CurveFitTest.h" />
     <ClInclude Include="Widget\IPopup.h" />
     <ClInclude Include="Widget\IWidget.h" />
-    <ClInclude Include="Widget\TestPopup.h" />
-    <ClInclude Include="Widget\TestWidget.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

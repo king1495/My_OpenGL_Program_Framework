@@ -48,15 +48,6 @@
     <ClCompile Include="Core\subSystem\GUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Widget\TestWidget.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget\TestPopup.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget\BrowserPopup.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Utility\BinaryFile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -64,6 +55,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Process\TestProcess.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\CurveFitTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,16 +137,7 @@
     <ClInclude Include="imGuiKR\ImGuiKR.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Widget\TestWidget.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Widget\IPopup.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget\TestPopup.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget\BrowserPopup.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Utility\BinaryFile.h">
@@ -177,6 +162,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Core\subSystem\ThreadPool.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\CurveFitTest.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
