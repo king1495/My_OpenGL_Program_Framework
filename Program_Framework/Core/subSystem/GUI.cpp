@@ -93,7 +93,8 @@ void GUI::Update()
 void GUI::GuiRender()
 {
 	if (!isActive) return;
-	ImGui::SetNextWindowPos(ImVec2(0, 0));
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->GetWorkPos());
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
@@ -101,17 +102,18 @@ void GUI::GuiRender()
 	ImGui::SetWindowSize(ImVec2(appDesc.Width, appDesc.Height));
 	ImGui::PopStyleVar(3);
 
-	ImGuiID dockspace_id = ImGui::GetID("Background");
+	ImGuiID dockspace_id = ImGui::GetID("MainDockspace");
 	ImGui::DockSpace(dockspace_id, ImVec2(0, 0), dockFlags);
+	//ImGui::DockSpaceOverViewport(viewport,dockFlags);
 
 	showMenuBar();
 
-	for (auto widget : widgets)
+	for (auto widget : widgets) 
 		widget.second->Render();
 
 	for (auto popup : popups)
 		popup.second->Render();
-
+	
 	ImGui::End();
 
 #ifdef _DEBUG

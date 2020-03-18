@@ -21,13 +21,13 @@ TestWidget::TestWidget(const std::wstring& _title)
 	sPlot1->lineColor = ImColor(1.f, 0.6f, 0.6f, 1.0f);
 
 	sPlot2->lineColor = ImColor(0.6f, 0.6f, 1.0f, 1.0f);
-	sPlot2->lineStyle = ImPlotLineStyle_None;
-	sPlot2->markerStyle = ImPlotMarkerStyle_Circle;
+	sPlot2->lineStyle = ImPlotLineStyle_::None;
+	sPlot2->markerStyle = ImPlotMarkerStyle_::Circle;
 
 	sPlot1->SetData(xdata, ydata1);
 	sPlot2->SetData(xdata, ydata2);
 
-	sAxes1->axesCoordType = ImPlotCoordType_Cartesian;
+	sAxes1->axesCoordType = ImPlotCoordType_::Cartesian;
 	sAxes1->xlim = ImVec2(0, radians(360.f));
 	sAxes1->ylim = ImVec2(-2, 2);
 	sAxes1->xGridOn = true;
@@ -41,7 +41,7 @@ TestWidget::TestWidget(const std::wstring& _title)
 	sAxes1->AddImPlot(sPlot1);
 	sAxes1->AddImPlot(sPlot2);
 
-	sAxes2->axesCoordType = ImPlotCoordType_Polar;
+	sAxes2->axesCoordType = ImPlotCoordType_::Polar;
 	sAxes2->xlim = ImVec2(-2, 2);
 	sAxes2->ylim = ImVec2(-2, 2);
 	sAxes2->xGridOn = true;

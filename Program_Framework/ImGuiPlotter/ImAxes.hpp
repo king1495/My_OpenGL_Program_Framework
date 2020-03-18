@@ -62,7 +62,7 @@ class ImAxes
 {
 public:
 	ImAxes()
-		: axesCoordType(ImPlotCoordType_Cartesian)
+		: axesCoordType(ImPlotCoordType_::Cartesian)
 		, axesColor(ImColor(255, 255, 255)), axesWidth(1.5f)
 		, gridColor(ImColor(170, 170, 170)), gridWidth(0.5f)
 		, xlabelSize(ImGui::GetFontSize()), ylabelSize(ImGui::GetFontSize())
@@ -159,7 +159,7 @@ inline void ImAxes<T>::Render()
 
 	ImRect data_bb;
 	switch (axesCoordType) {
-	case ImPlotCoordType_Polar:
+	case ImPlotCoordType_::Polar:
 	{
 		ImVec2 tempSize = CalcTextSize(ntos(180.f, yPrecision).c_str());
 		canvas_bb = ImRect(axes_bb.Min + tempSize * 1.f, axes_bb.Max - tempSize * 1.f);
@@ -186,7 +186,7 @@ inline void ImAxes<T>::Render()
 
 	switch (axesCoordType)
 	{
-	case ImPlotCoordType_Polar:
+	case ImPlotCoordType_::Polar:
 	{
 		ImVec2 center = canvas_bb.GetCenter();
 		float maxRadius = 0.5f * canvas_bb.GetWidth();
