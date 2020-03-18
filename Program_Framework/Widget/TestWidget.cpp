@@ -1,15 +1,6 @@
 #include "stdafx.h"
 #include "TestWidget.h"
 
-int ThreadFunc(int temp) {
-	for (int i = 0; i < temp; i++)
-	{
-		cout << temp << " : " << i << endl;
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
-	return temp * temp;
-}
-
 TestWidget::TestWidget(const std::wstring& _title)
 	:IWidget(_title)
 {
@@ -19,12 +10,6 @@ TestWidget::TestWidget(const std::wstring& _title)
 		xdata.emplace_back(radians(3.f * i));
 		ydata1.emplace_back(1.f * cos(xdata[i]));
 		ydata2.emplace_back(1.5f * sin(xdata[i]));
-	}
-
-	for (int i = 0; i < 10; ++i) {
-		std::future<int> temp = _ThreadPool.EnqueueTask(ThreadFunc, i);
-		if (std::future_status::ready == temp.wait_for(std::chrono::milliseconds(1)))
-			cout << "Result : " << temp.get() << endl;
 	}
 
 	sPlotter = make_shared<ImGuiPlotter<float>>();
@@ -96,6 +81,7 @@ void TestWidget::GuiUpdate()
 	using namespace ImGuiKR;
 	{
 		sPlotter->Render();
+		ImGui::SameLine();
 		//sPlotter->Render();
 	}
 }
