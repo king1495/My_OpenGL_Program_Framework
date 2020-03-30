@@ -93,25 +93,27 @@ void GUI::Update()
 void GUI::GuiRender()
 {
 	if (!isActive) return;
-	ImGui::SetNextWindowPos(ImVec2(0, 0));
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->GetWorkPos());
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	ImGui::Begin("Background", NULL, ImVec2(appDesc.Width, appDesc.Height), alpha, windowFlags);
+	ImGui::Begin("Background", NULL, windowFlags);
 	ImGui::SetWindowSize(ImVec2(appDesc.Width, appDesc.Height));
 	ImGui::PopStyleVar(3);
 
-	ImGuiID dockspace_id = ImGui::GetID("Background");
+	ImGuiID dockspace_id = ImGui::GetID("MainDockspace");
 	ImGui::DockSpace(dockspace_id, ImVec2(0, 0), dockFlags);
+	//ImGui::DockSpaceOverViewport(viewport,dockFlags);
 
 	showMenuBar();
 
-	for (auto widget : widgets)
+	for (auto widget : widgets) 
 		widget.second->Render();
 
 	for (auto popup : popups)
 		popup.second->Render();
-
+	
 	ImGui::End();
 
 #ifdef _DEBUG
@@ -210,7 +212,8 @@ void GUI::showMenuBar()
 
 void GUI::showSysteminfo()
 {
-	ImGui::Begin("System Info", NULL, ImVec2(0, 0), 0.4f, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking);
+	ImGui::SetNextWindowBgAlpha(0.4f);
+	ImGui::Begin("System Info", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking);
 	ImGui::Text("World Time   : %.3f s", _Timer.GetTime());
 	ImGui::Text("Elapsed Time : %.3f ms", 1000.0 * _Timer.GetElapsedTime());
 	ImGui::Text("Frame/Second : %5.0f", _Timer.GetFPS());

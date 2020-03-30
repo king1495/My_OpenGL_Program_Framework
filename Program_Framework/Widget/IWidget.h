@@ -7,8 +7,7 @@ class IWidget
 {
 public:
 	IWidget(const std::wstring& _title = L"Widget")
-		:bOpen(true), widgetAlpha(1.f), widgetSize(ImVec2(0, 0))
-		, widgetFlags(ImGuiWindowFlags_None)
+		:bOpen(true), widgetFlags(ImGuiWindowFlags_None)
 	{
 		char title[256];
 		WideCharToMultiByte(CP_UTF8, 0, _title.c_str(), -1, title, IM_ARRAYSIZE(title), NULL, NULL);
@@ -20,7 +19,7 @@ public:
 
 	virtual void Render() {
 		if (!bOpen) return;
-		ImGui::Begin(widgetTitle.c_str(), &bOpen, widgetSize, widgetAlpha, widgetFlags);
+		ImGui::Begin(widgetTitle.c_str(), &bOpen, widgetFlags);
 		GuiUpdate();
 		ImGui::End();
 	}
@@ -33,8 +32,8 @@ public:
 protected:
 	bool bOpen;
 	std::string widgetTitle;
-	ImVec2 widgetSize;
-	float widgetAlpha;
+	//ImVec2 widgetSize;
+	//float widgetAlpha;
 	ImGuiWindowFlags widgetFlags;
 	
 	virtual void GuiUpdate() = 0;

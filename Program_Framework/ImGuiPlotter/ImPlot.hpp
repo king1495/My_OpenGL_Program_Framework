@@ -29,21 +29,21 @@ struct c_unique {
 	int operator() () { return current_++; }
 };
 
-enum ImPlotCoordType_ {
-	ImPlotCoordType_Cartesian,
-	ImPlotCoordType_Polar,
+enum class ImPlotCoordType_ {
+	Cartesian,
+	Polar,
 };
 
-enum ImPlotLineStyle_ {
-	ImPlotLineStyle_None,
-	ImPlotLineStyle_Line,
+enum class ImPlotLineStyle_ {
+	None,
+	Line,
 	//ImPlotLineStyle_Dotted
 };
 
-enum ImPlotMarkerStyle_ {
-	ImPlotMarkerStyle_None,
-	ImPlotMarkerStyle_Circle,
-	ImPlotMarkerStyle_Rect
+enum class ImPlotMarkerStyle_ {
+	None,
+	Circle,
+	Rect
 };
 
 template<typename T>
@@ -51,9 +51,9 @@ class ImPlot
 {
 public:
 	ImPlot()
-		: axesType(ImPlotCoordType_Cartesian)
-		, lineStyle(ImPlotLineStyle_Line), lineColor(ImGui::GetColorU32(ImGuiCol_PlotLines)), lineWidth(1.f)
-		, markerStyle(ImPlotMarkerStyle_None), markerColor(ImGui::GetColorU32(ImGuiCol_PlotLines)), markerSize(2.f)
+		: axesType(ImPlotCoordType_::Cartesian)
+		, lineStyle(ImPlotLineStyle_::Line), lineColor(ImGui::GetColorU32(ImGuiCol_PlotLines)), lineWidth(1.f)
+		, markerStyle(ImPlotMarkerStyle_::None), markerColor(ImGui::GetColorU32(ImGuiCol_PlotLines)), markerSize(2.f)
 		, data_bb(ImRect()), canvas_bb(ImRect())
 	{};
 	virtual ~ImPlot() {};
@@ -114,7 +114,7 @@ inline void ImPlot<T>::Render()
 	T y1, x1;
 	bool dataRender = false;
 
-	if (axesType == ImPlotCoordType_Polar) {
+	if (axesType == ImPlotCoordType_::Polar) {
 		T radius = vYdata[0];
 		T theta = vXdata[0];
 		x0 = radius * cos(theta);
@@ -133,13 +133,13 @@ inline void ImPlot<T>::Render()
 	if (dataRender) {
 		switch (markerStyle)
 		{
-		case ImPlotMarkerStyle_Circle:
+		case ImPlotMarkerStyle_::Circle:
 			window->DrawList->AddCircleFilled(
 				pos0, markerSize
 				//, colorData[0]);
 				, markerColor);
 			break;
-		case ImPlotMarkerStyle_Rect:
+		case ImPlotMarkerStyle_::Rect:
 			window->DrawList->AddRectFilled(
 				pos0 - ImVec2(0.5f * markerSize, 0.5f * markerSize)
 				, pos0 + ImVec2(0.5f * markerSize, 0.5f * markerSize)
@@ -153,7 +153,7 @@ inline void ImPlot<T>::Render()
 
 	for (int n = 1; n < vYdata.size(); n++)
 	{
-		if (axesType == ImPlotCoordType_Polar) {
+		if (axesType == ImPlotCoordType_::Polar) {
 			T radius = vYdata[n];
 			T theta = vXdata[n];
 			x1 = radius * cos(theta);
@@ -172,7 +172,7 @@ inline void ImPlot<T>::Render()
 		if (dataRender) {
 			switch (lineStyle)
 			{
-			case ImPlotLineStyle_Line:
+			case ImPlotLineStyle_::Line:
 				window->DrawList->AddLine(
 					pos0
 					, pos1
@@ -185,13 +185,13 @@ inline void ImPlot<T>::Render()
 			}
 			switch (markerStyle)
 			{
-			case ImPlotMarkerStyle_Circle:
+			case ImPlotMarkerStyle_::Circle:
 				window->DrawList->AddCircleFilled(
 					pos1, markerSize
 					//, colorData[n]);
 					, markerColor);
 				break;
-			case ImPlotMarkerStyle_Rect:
+			case ImPlotMarkerStyle_::Rect:
 				window->DrawList->AddRectFilled(
 					pos1 - ImVec2(0.5f * markerSize, 0.5f * markerSize)
 					, pos1 + ImVec2(0.5f * markerSize, 0.5f * markerSize)

@@ -93,8 +93,9 @@ void OpenGLCore::InitImGui()
 	ImGuiIO& io = ImGui::GetIO();
 	io.Fonts->AddFontFromFileTTF("C:/Windows/Fonts/malgunbd.ttf", 16.f, NULL, io.Fonts->GetGlyphRangesKorean());
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableSetMousePos;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 	//io.ConfigViewportsNoTaskBarIcon = true;
 	io.ConfigDockingWithShift = true;
 
@@ -125,12 +126,17 @@ void OpenGLCore::BeginImGui()
 
 void OpenGLCore::EndImGui()
 {
-	ImGui::EndFrame();
+	ImGuiIO& io = ImGui::GetIO();
+	io.DisplaySize = ImVec2(appDesc.Width, appDesc.Height);
+
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-	//ImGui::UpdatePlatformWindows();
-	//ImGui::RenderPlatformWindowsDefault();
+	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+		//GLFWwindow* backup_current_context = glfwGetCurrentContext();
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+		glfwMakeContextCurrent(appDesc.pWindow);
+	}
 }
 
 void OpenGLCore::SetImGuiStyle()

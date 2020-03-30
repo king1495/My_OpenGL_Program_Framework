@@ -1,15 +1,6 @@
 #include "stdafx.h"
 #include "TestWidget.h"
 
-int ThreadFunc(int temp) {
-	for (int i = 0; i < temp; i++)
-	{
-		cout << temp << " : " << i << endl;
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
-	return temp * temp;
-}
-
 TestWidget::TestWidget(const std::wstring& _title)
 	:IWidget(_title)
 {
@@ -21,14 +12,6 @@ TestWidget::TestWidget(const std::wstring& _title)
 		ydata2.emplace_back(1.5f * sin(xdata[i]));
 	}
 
-	for (int i = 0; i < 10; ++i) {
-		std::future<int> temp = _ThreadPool.EnqueueTask(ThreadFunc, i);
-		if (std::future_status::ready == temp.wait_for(std::chrono::milliseconds(1)))
-			cout << "Result : " << temp.get() << endl;
-		//std::future<int> temp = std::async(ThreadFunc, i);
-
-	}
-
 	sPlotter = make_shared<ImGuiPlotter<float>>();
 	sAxes1 = make_shared<ImAxes<float>>();
 	sAxes2 = make_shared<ImAxes<float>>();
@@ -38,13 +21,13 @@ TestWidget::TestWidget(const std::wstring& _title)
 	sPlot1->lineColor = ImColor(1.f, 0.6f, 0.6f, 1.0f);
 
 	sPlot2->lineColor = ImColor(0.6f, 0.6f, 1.0f, 1.0f);
-	sPlot2->lineStyle = ImPlotLineStyle_None;
-	sPlot2->markerStyle = ImPlotMarkerStyle_Circle;
+	sPlot2->lineStyle = ImPlotLineStyle_::None;
+	sPlot2->markerStyle = ImPlotMarkerStyle_::Circle;
 
 	sPlot1->SetData(xdata, ydata1);
 	sPlot2->SetData(xdata, ydata2);
 
-	sAxes1->axesCoordType = ImPlotCoordType_Cartesian;
+	sAxes1->axesCoordType = ImPlotCoordType_::Cartesian;
 	sAxes1->xlim = ImVec2(0, radians(360.f));
 	sAxes1->ylim = ImVec2(-2, 2);
 	sAxes1->xGridOn = true;
@@ -58,7 +41,7 @@ TestWidget::TestWidget(const std::wstring& _title)
 	sAxes1->AddImPlot(sPlot1);
 	sAxes1->AddImPlot(sPlot2);
 
-	sAxes2->axesCoordType = ImPlotCoordType_Polar;
+	sAxes2->axesCoordType = ImPlotCoordType_::Polar;
 	sAxes2->xlim = ImVec2(-2, 2);
 	sAxes2->ylim = ImVec2(-2, 2);
 	sAxes2->xGridOn = true;
@@ -98,6 +81,7 @@ void TestWidget::GuiUpdate()
 	using namespace ImGuiKR;
 	{
 		sPlotter->Render();
+		ImGui::SameLine();
 		//sPlotter->Render();
 	}
 }

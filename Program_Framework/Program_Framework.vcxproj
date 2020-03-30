@@ -34,7 +34,6 @@
     <ClCompile Include="Utility\BinaryFile.cpp" />
     <ClCompile Include="Utility\tinyfiledialogs.c" />
     <ClCompile Include="Widget\BrowserPopup.cpp" />
-    <ClCompile Include="Widget\FileSelectWidget.cpp" />
     <ClCompile Include="Widget\TestPopup.cpp" />
     <ClCompile Include="Widget\TestWidget.cpp" />
   </ItemGroup>
@@ -72,7 +71,6 @@
     <ClInclude Include="Utility\TimeUtil.hpp" />
     <ClInclude Include="Utility\tinyfiledialogs.h" />
     <ClInclude Include="Widget\BrowserPopup.h" />
-    <ClInclude Include="Widget\FileSelectWidget.h" />
     <ClInclude Include="Widget\IPopup.h" />
     <ClInclude Include="Widget\IWidget.h" />
     <ClInclude Include="Widget\TestPopup.h" />
