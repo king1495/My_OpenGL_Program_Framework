@@ -211,7 +211,7 @@ void OpenGLCore::Run()
 	Init();
 
 	while (!glfwWindowShouldClose(appDesc.pWindow))
-	{
+	{		
 		_Timer.Update();
 		glfwPollEvents();
 

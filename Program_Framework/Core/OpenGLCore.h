@@ -32,7 +32,7 @@ private:
 
 private: // Callbacks
 	static void ErrorCallback(int error, const char* description) {
-		std::cout << description << std::endl;
+		std::cerr << description << std::endl;
 	}
 
 	static void WindowSizeChangeCallback(GLFWwindow* window, int width, int height)
