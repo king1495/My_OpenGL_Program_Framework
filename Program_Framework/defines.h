@@ -5,10 +5,10 @@
 #define SAFE_DELETE(p)			{ if (p) { delete (p); (p)=nullptr; } }
 #define SAFE_DELETE_ARRAY(p)	{ if (p) { delete[] (p); (p)=nullptr; } }
 
-template <typename T, size_t N> char(*RtlpNumberOf(T(&)[N]))[N];
-#define ARRAYSIZE(A) (sizeof(*RtlpNumberOf(A)))
-
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+//template <typename T, size_t N> char(*RtlpNumberOf(T(&)[N]))[N];
+//#define ARRAYSIZE(A) (sizeof(*RtlpNumberOf(A)))
+//
+//#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 //InputController
 #define MAX_INPUT_KEY 255
@@ -53,4 +53,4 @@ template <typename T, size_t N> char(*RtlpNumberOf(T(&)[N]))[N];
 #define VK_Y 0x59
 #define VK_Z 0x5A
 
-#define _DB Database::GetInstance()
+#define _Config Config::GetInstance()

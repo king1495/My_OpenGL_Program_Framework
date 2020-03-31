@@ -1,17 +1,16 @@
 #include "stdafx.h"
 #include "Task.h"
 
-int ThreadFunc(int temp) {
-	for (int i = 0; i < temp; i++)
-	{
-		cout << temp << " : " << i << endl;
+int ThreadFunc(const int& max_iter) {
+	for (int i = 0; i < max_iter; i++) {
+		_Logger.info(L"%d : %d", max_iter, i);
+		//cout << max_iter << " : " << i << endl;
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
-	return temp * temp;
+	return max_iter * max_iter;
 }
 
-void Task::Init()
-{
+void Task::Init() {
 	pGUI = make_unique<GUI>();
 	pGUI->AddWidget("Test", new TestWidget(L"Test Window"));
 	pGUI->AddPopup("Test Popup", new TestPopup("Test Popup"));
@@ -19,27 +18,16 @@ void Task::Init()
 
 	for (int i = 0; i < 10; ++i) {
 		std::future<int> temp = _ThreadPool.EnqueueTask(ThreadFunc, i);
-		if (std::future_status::ready == temp.wait_for(std::chrono::milliseconds(1)))
+		if (std::future_status::ready ==
+			temp.wait_for(std::chrono::milliseconds(1)))
 			cout << "Result : " << temp.get() << endl;
 	}
 }
 
-void Task::Update()
-{
-	pGUI->Update();
-}
+void Task::Update() { pGUI->Update(); }
 
-void Task::Render()
-{
+void Task::Render() {}
 
-}
+void Task::GuiRender() { pGUI->GuiRender(); }
 
-void Task::GuiRender()
-{
-	pGUI->GuiRender();
-}
-
-void Task::Destroy()
-{
-	_DB->DestroyInstance();
-}
+void Task::Destroy() { _Config->DestroyInstance(); }

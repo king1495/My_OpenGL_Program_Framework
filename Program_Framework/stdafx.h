@@ -45,7 +45,6 @@ using namespace glm;
 #define IMGUI_DEFINE_MATH_OPERATORS
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include <ImGui/imgui.h>
-//#include <ImGui/imgui_internal.h>
 #include <ImGui/imgui_impl_glfw.h>
 #include <ImGui/imgui_impl_opengl3.h>
 #include <ImGuiPlotter/ImGuiPlotter.hpp>
@@ -55,8 +54,9 @@ using namespace glm;
 #include "defines.h"
 #include "utility.h"
 
-#include "Core/subSystem/Database.h"
+#include "Core/subSystem/Config.h"
 #include "Core/subSystem/Timer.h"
+#include "Core/subSystem/Logger.h"
 #include "Core/subSystem/Input.h"
 #include "Core/subSystem/ThreadPool.h"
 #include "Core/subSystem/GUI.h"

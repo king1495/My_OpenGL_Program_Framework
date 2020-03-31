@@ -39,10 +39,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\OpenGLCore.h" />
-    <ClInclude Include="Core\subSystem\Database.h" />
+    <ClInclude Include="Core\subSystem\Config.h" />
     <ClInclude Include="Core\subSystem\GUI.h" />
     <ClInclude Include="Core\subSystem\Input.h" />
     <ClInclude Include="Core\subSystem\ISubSystem.h" />
+    <ClInclude Include="Core\subSystem\Logger.h" />
     <ClInclude Include="Core\subSystem\Singleton.h" />
     <ClInclude Include="Core\subSystem\ThreadPool.h" />
     <ClInclude Include="Core\subSystem\Timer.h" />
